@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página completa con proxy usando JavaScript</title>
   <style>
     * {
       margin: 0;
@@ -16,14 +17,33 @@
       overflow: hidden;
     }
 
-    iframe {
+    #contenido {
       width: 100%;
       height: 100%;
-      border: none;
     }
   </style>
 </head>
 <body>
-  <iframe src="proxy.php"></iframe>
+  <div id="contenido">Cargando...</div>
+
+  <script>
+    // URL del proxy (utilizamos CORS Anywhere)
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
+    // URL de la página original que deseas mostrar
+    const targetUrl = "https://ejemplo.com";
+
+    // Realizar la solicitud al proxy
+    fetch(proxyUrl + targetUrl)
+      .then(response => response.text())
+      .then(data => {
+        // Insertar el contenido dentro del div #contenido
+        document.getElementById("contenido").innerHTML = data;
+      })
+      .catch(error => {
+        console.error("Error al cargar el contenido:", error);
+        document.getElementById("contenido").innerHTML = "No se pudo cargar el contenido.";
+      });
+  </script>
 </body>
 </html>
