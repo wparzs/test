@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página completa con proxy usando JavaScript</title>
+  <title>Contenido enmascarado</title>
   <style>
+    /* Configuración de pantalla completa */
     * {
       margin: 0;
       padding: 0;
@@ -15,6 +16,9 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     #contenido {
@@ -27,17 +31,13 @@
   <div id="contenido">Cargando...</div>
 
   <script>
-    // URL del proxy (utilizamos CORS Anywhere)
+    // Proxy público (CORS Anywhere) para enmascarar la URL de origen
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-
-    // URL de la página original que deseas mostrar
     const targetUrl = "https://warzss.github.io/test-instagram/";
 
-    // Realizar la solicitud al proxy
     fetch(proxyUrl + targetUrl)
       .then(response => response.text())
       .then(data => {
-        // Insertar el contenido dentro del div #contenido
         document.getElementById("contenido").innerHTML = data;
       })
       .catch(error => {
