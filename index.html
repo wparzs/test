@@ -1,49 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contenido enmascarado</title>
-  <style>
-    /* Configuración de pantalla completa */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incrustar página completa</title>
+    <style>
+        /* Quita márgenes y paddings en el body y el html */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #contenido {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+        /* Configura el iframe para que ocupe toda la pantalla */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-  <div id="contenido">Cargando...</div>
-
-  <script>
-    // Proxy público (CORS Anywhere) para enmascarar la URL de origen
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const targetUrl = "https://warzss.github.io/test-instagram/";
-
-    fetch(proxyUrl + targetUrl)
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("contenido").innerHTML = data;
-      })
-      .catch(error => {
-        console.error("Error al cargar el contenido:", error);
-        document.getElementById("contenido").innerHTML = "No se pudo cargar el contenido.";
-      });
-  </script>
+    <iframe src="https://warzss.github.io/test-instagram/" allowfullscreen></iframe>
 </body>
 </html>
